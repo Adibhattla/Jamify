@@ -1,14 +1,20 @@
+package jamify;
+
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Queue;
@@ -39,6 +45,7 @@ public class AudioPlay extends AllSongs {
         MusicPlayerUI.play.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                fs.fancy(mediaFile[0].getSource().toString().replace("file:","").replace("%20"," "));
                 mediaPlayer.play();
                 autoNext(AudioPlay.this.getSongQ(), mediaFile);
             }
@@ -87,6 +94,7 @@ public class AudioPlay extends AllSongs {
                         mediaFile[0] = new Media(new File(playSong).toURI().toString());
                     }
                     mediaPlayer = new MediaPlayer(mediaFile[0]);   //play the next song from Q
+                    fs.fancy(mediaFile[0].getSource().toString().replace("file:","").replace("%20"," "));
                     mediaPlayer.play();
                     autoNext(getSongQ(), mediaFile);  //ensures that next song in Q is played automatically without clicking next
                 } else {
@@ -97,7 +105,7 @@ public class AudioPlay extends AllSongs {
 
         MusicPlayerUI.previous.addActionListener(e -> {
             if (!getSongStack().isEmpty()) {
-                addToQueue(mediaFile[0].getSource());  //add the current song to Q
+                addToQueueStart(mediaFile[0].getSource());  //add the current song to Q
                 mediaPlayer.stop();
                 mediaPlayer.dispose();
                 String playSong = popFromSongStack();  //get prev song from stack
@@ -107,6 +115,7 @@ public class AudioPlay extends AllSongs {
                     mediaFile[0] = new Media(new File(playSong).toURI().toString());
                 }
                 mediaPlayer = new MediaPlayer(mediaFile[0]);
+                fs.fancy(mediaFile[0].getSource().toString().replace("file:","").replace("%20"," "));
                 mediaPlayer.play();
                 autoNext(getSongQ(), mediaFile);
             } else {
@@ -138,13 +147,15 @@ public class AudioPlay extends AllSongs {
                     addToSongStack(mediaFile[0].getSource());
                     mediaPlayer.stop();
                     mediaPlayer.dispose();
-                    String playSong = getSongQ().poll();
+                    String playSong = getSongQ().peek();
+                    //String playSong = getSongQ().poll();
                     if (playSong.contains("file")){
                         mediaFile[0] = new Media(new File(playSong).toString());
                     } else {
                         mediaFile[0] = new Media(new File(playSong).toURI().toString());
                     }
                     mediaPlayer = new MediaPlayer(mediaFile[0]);
+                    fs.fancy(mediaFile[0].getSource().toString().replace("file:","").replace("%20"," "));
                     mediaPlayer.play();
                     autoNext(getSongQ(), mediaFile);
                 } else {
@@ -171,6 +182,7 @@ public class AudioPlay extends AllSongs {
                         mediaFile[0] = new Media(new File(playSong).toURI().toString());
                     }
                     mediaPlayer = new MediaPlayer(mediaFile[0]);
+                    fs.fancy(mediaFile[0].getSource().toString().replace("file:","").replace("%20"," "));
                     mediaPlayer.play();
                     autoNext(getSongQ(), mediaFile);
                 } else {
