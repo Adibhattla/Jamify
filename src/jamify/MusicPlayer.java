@@ -21,6 +21,7 @@ public class MusicPlayer extends JFrame implements ActionListener {
 	
 	static String commonPath = "/Users/satishrambhatla/Documents/workspace/Jamify/src/jamify/";
 	static JFrame window = new JFrame ("Something Working");
+	static AllSongs allSongs;
 	JPanel display = new JPanel();
 	static JPanel playlist = new JPanel();
 	static JPanel showqueue = new JPanel();
@@ -40,7 +41,7 @@ public class MusicPlayer extends JFrame implements ActionListener {
 	
 	public MusicPlayer() {
 		
-		AllSongs allSongs = new AllSongs();
+		allSongs = new AllSongs();
 		display.setBackground(Color.WHITE);
 		playlist.setBackground(Color.black);
 		playlist.setLayout(new BoxLayout(playlist,BoxLayout.Y_AXIS));
@@ -63,8 +64,7 @@ public class MusicPlayer extends JFrame implements ActionListener {
 		ActionListener Action1 = (ActionEvent e) -> {
            try {
         	 allSongs.removeAll(); 
-	         System.out.println(allSongsPanel);
-	         allSongs.displayAllSongsPanel();  
+	         allSongs.displayAllSongsPanel(); 
 	         JPanel allSongsPanel = allSongs.displaySongsOnThePanel(new File("/Users/satishrambhatla/Documents/workspace/Jamify/src/jamify/Allsongs.csv"), true);        
 	         window.getContentPane().add(allSongsPanel);
 	         allSongsPanel.revalidate();

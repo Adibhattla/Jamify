@@ -54,7 +54,7 @@ public class AllSongs extends JPanel implements ActionListener {
     /* Constructor, sets up the panel and Sets the position and size of each component by calling
        its setBounds() method. */
     public AllSongs() {
-    	displayAllSongsPanel();
+//    	displayAllSongsPanel();
     }
     
     public void displayAllSongsPanel() {

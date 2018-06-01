@@ -60,7 +60,7 @@ public class MusicPlayerUI extends JFrame implements ActionListener {
 		allSongsButton.setBounds(10,10,30,20);
 		 ActionListener Action1 = (ActionEvent e) -> {
            try {
-        	 allSongs.removeAll(); 
+//        	 allSongs.removeAll(); 
         	 allSongs.displayAllSongsPanel();  
         	 JPanel allSongsPanel = allSongs.displaySongsOnThePanel(new File("/Users/satishrambhatla/Documents/workspace/Jamify/src/jamify/Allsongs.csv"), true);
         	 MusicPlayer.window.getContentPane().add(allSongsPanel);
@@ -181,11 +181,11 @@ public class MusicPlayerUI extends JFrame implements ActionListener {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						
-						AllSongs allSongs = new AllSongs();
-						allSongs.displayAllSongsPanel();
-						JPanel jp = allSongs.displaySongsOnThePanel(new File(AllSongs.playlistNamePathsList.get(finalI).getPlayListPath()), false);
+						MusicPlayer.allSongs.removeAll();
+						MusicPlayer.allSongs.displayAllSongsPanel();
+						JPanel jp = MusicPlayer.allSongs.displaySongsOnThePanel(new File(AllSongs.playlistNamePathsList.get(finalI).getPlayListPath()), false);
 						MusicPlayer.window.getContentPane().add(jp);
-						jp.revalidate();
+						jp.validate();
 			           	jp.repaint(); 
 					}
 				});
